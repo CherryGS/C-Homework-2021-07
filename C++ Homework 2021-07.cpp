@@ -1,20 +1,48 @@
-// C++ Homework 2021-07.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include "MyArr.h"
+#include <assert.h>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using std::cout;
+using std::endl;
+MyArr<double> r;
+
+double test_arr[10010];
+
+int main() {
+#ifdef DEBUG
+    cout << "DEBUG Mode" << endl;
+#endif
+
+    r.SetArrSiz(2);
+    assert(r.GetSize() == 2);
+    assert(r[0] == 0);
+
+    r.SetArrValue(0, 1.0);
+    r.SetArrValue(1, 2.0);
+
+    assert(r[1] == 2.0);
+
+    r.PrintArr();
+    r.FreeArr();
+
+    assert(r.GetSize() == 0);
+    assert(r.GetPointer() == 0);
+
+    srand(time(0));
+    for (int n = 1; n <= 3; n++) {
+        cout << endl << "----- Test " << n << " -----" << endl;
+        int len = 10;
+        for (int i = 0; i < len; i++) {
+            test_arr[i] = double(rand() % int(1e4)) * 1.1;
+            r.SetArrValue(i, test_arr[i]);
+        }
+        for (int i = 0; i < len; i++)
+            cout << test_arr[i] << ' ';
+        cout << endl;
+        for (int i = 0; i < len; i++)
+            cout << r[i] << ' ';
+        cout << endl;
+    }
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

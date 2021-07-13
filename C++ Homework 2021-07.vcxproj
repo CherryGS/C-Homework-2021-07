@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="C++ Homework 2021-07.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyArr.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
