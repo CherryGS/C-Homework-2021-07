@@ -43,10 +43,6 @@ template <class T> int MyArr<T>::SetArrSiz(cint re_siz) {
         return 0;
     }
 
-#ifdef DEBUG
-    assert(re_siz > 0);
-#endif
-
     T* tmp = new T[re_siz];
     if (tmp == NULL) {
         cout << "ERROR caused because of 'out of memory'" << endl;
@@ -54,10 +50,6 @@ template <class T> int MyArr<T>::SetArrSiz(cint re_siz) {
     }
     for (int i = 0; i < re_siz; i++)
         tmp[i] = T(0);
-
-#ifdef DEBUG
-    assert(tmp != NULL);
-#endif
 
     for (int i = 0; i < _min(usd, re_siz); i++)
         tmp[i] = bgn[i];

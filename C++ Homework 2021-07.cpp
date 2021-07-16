@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MyArr.h"
+#include "MyArr.hpp"
 #include <assert.h>
 
 using std::cout;
@@ -28,6 +28,7 @@ int main() {
     assert(r.GetPointer() == 0);
 
     MyArr<double> r2(r);
+    assert(r.GetSize() == r2.GetSize());
     srand((unsigned int)time(0));
     for (int n = 1; n <= 3; n++) {
         cout << endl << "----- Test " << n << " -----" << endl;
