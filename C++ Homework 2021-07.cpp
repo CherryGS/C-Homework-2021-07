@@ -29,6 +29,7 @@ int main() {
 
     MyArr<double> r2(r);
     assert(r.GetSize() == r2.GetSize());
+    for (int i = 0; i < r.GetSize(); i++) assert(r[i] == r2[i]);
     srand((unsigned int)time(0));
     for (int n = 1; n <= 3; n++) {
         cout << endl << "----- Test " << n << " -----" << endl;
@@ -46,7 +47,7 @@ int main() {
         cout << endl;
         for (int i = 0; i < len; i++)
             cout << r2[i] << ' ';
-        assert(r.GetSize == r2.GetSize());
+        assert(r.GetSize() == r2.GetSize());
         cout << endl;
     }
 
