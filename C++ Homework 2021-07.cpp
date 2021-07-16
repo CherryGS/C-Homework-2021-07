@@ -24,11 +24,11 @@ int main() {
 
     r.PrintArr();
     r.FreeArr();
-
     assert(r.GetSize() == 0);
     assert(r.GetPointer() == 0);
 
-    srand(time(0));
+    MyArr<double> r2(r);
+    srand((unsigned int)time(0));
     for (int n = 1; n <= 3; n++) {
         cout << endl << "----- Test " << n << " -----" << endl;
         int len = 10;
@@ -39,8 +39,13 @@ int main() {
         for (int i = 0; i < len; i++)
             cout << test_arr[i] << ' ';
         cout << endl;
+        r2 = r;
         for (int i = 0; i < len; i++)
             cout << r[i] << ' ';
+        cout << endl;
+        for (int i = 0; i < len; i++)
+            cout << r2[i] << ' ';
+        assert(r.GetSize == r2.GetSize());
         cout << endl;
     }
 

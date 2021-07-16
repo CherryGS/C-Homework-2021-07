@@ -1,8 +1,9 @@
-#include <iostream>
 #pragma once
+#ifndef _MyArr_h
+#define _MyArr_h
+
 #define cint const int&
-using std::cout;
-using std::endl;
+#include <iostream>
 
 template <class T> class MyArr {
 private:
@@ -11,16 +12,31 @@ private:
     int _min(cint x, cint y) { return x > y ? y : x; }
 public:
     MyArr() : bgn(0), usd(0), lst(0) {}
+    MyArr(const MyArr& a) { usd = a.usd; lst = a.lst; bgn = new T[lst]; memcpy(bgn, a.bgn, lst * sizeof(T)); }
     ~MyArr() { delete[]bgn; }
     T operator [] (cint x) const { return bgn[x]; }
+    MyArr<T>& operator = (const MyArr& a);
     T* GetPointer() { return bgn; }
     int GetSize() { return lst; }
     int SetArrSiz(cint re_siz);
-    void SetArrValue(cint loc, const T& val);
     void FreeArr();
+    void SetArrValue(cint loc, const T& val);
     void PrintArr();
 };
 
+using std::cout;
+using std::endl;
+template <class T> MyArr<T>& MyArr<T>::operator = (const MyArr& a) {
+    if (this == &a) {
+        // ·ÀÖ¹×Ô¸³Öµ
+        return *this;
+    }
+    usd = a.usd; 
+    lst = a.lst; 
+    bgn = new T[lst]; 
+    memcpy(bgn, a.bgn, lst * sizeof(T));
+    return *this;
+}
 template <class T> int MyArr<T>::SetArrSiz(cint re_siz) {
     if (re_siz <= 0) {
         cout << "ERROR caused because value of 're_siz' is invalid." << endl;
@@ -57,7 +73,6 @@ template<class T> void MyArr<T>::SetArrValue(cint loc, const T& val) {
     bgn[loc] = val;
     if (loc + 1 > usd) usd = loc + 1;
 }
-
 template<class T> void MyArr<T>::FreeArr() {
     delete[] bgn;
     lst = 0;
@@ -70,3 +85,4 @@ template<class T> void MyArr<T>::PrintArr() {
         cout << bgn[i] << ' ';
     cout << endl;
 }
+#endif
